@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+#define max(a,b) (((a) > (b))? (a) : (b))
+using namespace std;
+
+int main ()
+{
+  int n, k;
+  char str[112123], l;
+  int va[112123], vb[112123];
+  int maxa, maxb;
+
+  cin >> n >> k;
+  scanf (" %s", str);
+
+  va[0] = vb[0] = 0;
+  if (str[0] == 'a') va[0]++;
+  else vb[0]++;
+
+  for (int i = 1; i < n; i++){
+    va[i] = va[i-1] + ((str[i]=='a')? 1 : 0);
+    vb[i] = vb[i-1] + ((str[i]=='b')? 1 : 0);
+  }
+
+  maxa = 0;
+  int j=0, k=1;
+  while (k < n){
+    if (va[k] - va[j] <= k){
+      maxa = max(maxa,k-j);
+      k++;
+    }
+    else j++;
+  }
+  j=0; k=1;
+  while(k < n){
+    if (vb[k] - vb[j] <= k){
+      maxb = max(maxb,k-j);
+      k++;
+    }
+    else j++;
+  }
+
+  cout << max(maxa,maxb) << endl;
+
+  return 0;
+}

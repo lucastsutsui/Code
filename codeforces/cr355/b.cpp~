@@ -1,0 +1,31 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main ()
+{
+  int n, h, k, a, curr;
+  int cont = 0;
+  queue s<int>;
+
+  cin >> n >> h >> k;
+
+  for (int i = 0; i < n; i++){
+    cin >> a;
+    s.push_back(a);
+  }
+
+  curr=0;
+  while (1){
+    while (curr+s.front() <= h){
+      curr += s.front();
+      s.pop_front();
+    }
+    if (curr >= k) curr -= k;
+    else curr = 0;
+    cont++;
+  }
+
+  cout << cont << endl;
+
+  return 0;
+}

@@ -1,0 +1,34 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main ()
+{
+  int n, p, num;
+  vector<pair<int,int> > v;
+  int dp[25][35];
+
+  while (cin >> n && n){
+    cin >> p;
+
+    v.clear();
+    for (int i = 0; i < n; i++){
+      cin >> num;
+      v.push_back(num);
+    }
+
+    for (int i = 0; i <= n; i++) dp[i][0] = 0;
+    for (int i = 0; i <= p; i++) dp[0][p] = 0;
+
+    for (int i = 1; i <= n; i++){
+      for (int j = 1; j <= p; j++){
+	dp[i][j] = dp[i][j-1];
+	if (j >= v[i-1] && dp[i][j] < dp[i-1][j-v[i-1]] + v[j])
+	  dp[i][j] = dp[i-1][j-v[i-1]] + v[j];
+      }
+    }
+
+    cout << dp[n][p] << " min.\n";
+  }
+
+  return 0;
+}

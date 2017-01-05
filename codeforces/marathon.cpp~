@@ -1,0 +1,29 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+void update (char v[], int res){
+  for (int i = 0; i < TAM; i++) v[i] = rand()%2;
+}
+
+int main ()
+{
+  int res;
+  char v[TAM+1];
+
+  srand(12345);
+
+  for (int i = 0; i < TAM; i++) v[i] = rand()%2;
+
+  for (int i = 0; i < ATTEMPT; i++){
+    for (int j = 0; j < n; j++)
+      cout << v[j];
+
+    cout << endl; fflush(stdout);
+
+    cin >> res;
+    
+    update(v, res);
+  }
+
+  return 0;
+}

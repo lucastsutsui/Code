@@ -1,0 +1,18 @@
+#include <stdio.h>
+
+int main ()
+{
+  int n, m, ant;
+
+  scanf ("%d %x", &n, &ant);
+  while (scanf ("%d %x", &n, &m) != EOF)
+    if (n == 2){
+      printf("%d ", (m-ant));
+      ant = m;
+    }
+
+  printf ("\n");
+
+  return 0;
+
+}

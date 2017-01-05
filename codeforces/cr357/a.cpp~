@@ -1,0 +1,21 @@
+#include <bits/stdc++.h>
+#define max(a,b) (((a)>(b))? (a) : (b))
+using namespace std;
+
+int main ()
+{
+  char name[50];
+  int n, af, be;
+  bool flag = false;
+
+  scanf ("%d", &n);
+
+  while (n--){
+    scanf (" %s %d %d", name, &be, &af);
+    if (be >= 2400 && be > af) flag = true;
+  }
+
+  cout << (flag? "YES\n" : "NO\n");
+
+  return 0;
+}

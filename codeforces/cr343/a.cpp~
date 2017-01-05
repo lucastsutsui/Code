@@ -1,0 +1,36 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int main ()
+{
+  int n, cont=0;
+  char v[112][112];
+
+  scanf ("%d", &n);
+  getchar();
+
+  for (int i = 0; i < n; i++){
+    for (int j = 0; j < n; j++)
+      v[i][j] = getchar();
+    getchar();
+  }
+
+  for (int i = 0; i < n; i++){
+    for (int j = 0; j < n-1; j++)
+      if (v[i][j] == 'C' && v[i][j+1] == 'C'){
+	cont++;
+	v[i][j] = v[i][j+1] = '.';
+      }
+  }
+
+  for (int i = 0; i < n; i++){
+    for (int j = 0; j < n-1; j++)
+      if (v[j][i] == 'C' && v[j][i+1] == 'C'){
+	cont++;
+	v[j][i] = v[j][i+1] = '.';
+      }
+  }
+
+  cout << cont << endl;
+  return 0;
+}

@@ -1,0 +1,60 @@
+#include <bits/stdc++.h>
+#define min(a,b) (((a)<(b))? (a) : (b))
+#define max(a,b) (((a)>(b))? (a) : (b))
+typedef long long int lld;
+typedef unsigned long long int llu;
+
+using namespace std;
+
+int main ()
+{
+  int m;
+  llu max, tam;
+
+  cin >> m;
+
+  llu test = (llu)cbrt(m);
+  for (llu i = 1; i <= test; i++){
+    llu aux = i, t=0, sum = 0;
+    llu limit = m;
+    
+    while (aux >= 1){
+      if (sum + (aux*aux*aux) <= limit){
+	limit = (aux*aux*aux);
+	t += (limit-sum)/(aux*aux*aux);
+	sum += (aux*aux*aux);
+      }
+      aux--;
+    }
+
+    if (t >= tam){
+      tam = t; max = sum;
+    }
+  }
+  
+  /*
+  max = 0;
+  tam = 0;
+  for (llu i = 1; i <= m; i++){
+    llu test = (llu)cbrt(i);
+    llu aux = i, t=0;
+
+    while (test >= 1){
+      if (aux >= test*test*test){
+	t += aux/(test*test*test);
+	aux = aux%(test*test*test);
+	test = (llu)cbrt(aux);
+      }
+      else test--;
+    }
+
+    if (t >= tam){
+      tam = t;
+      max = i;
+    }
+    }*/
+
+  cout << tam << ' ' << max << endl;
+
+  return 0;
+}

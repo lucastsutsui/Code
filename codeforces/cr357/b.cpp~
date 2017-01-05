@@ -1,0 +1,45 @@
+#include <bits/stdc++.h>
+#define max(a,b) (((a)>(b))? (a) : (b))
+#define N1 1234567
+#define N2 123456
+#define N3 1234
+using namespace std;
+
+int *dp;
+
+void dpp (int i, int n){
+  if (n==1) dp[i/32] |= 1<<(i%32);
+  if (n==0) dp[i/32] 
+}
+
+int dppp (int i){
+  return 0x1 & (dp[i/32]>>(i%32));
+}
+
+int test (int n){
+  dp = (int*)malloc((n/32+1)*sizeof(int));
+
+  dpp(0, 0);
+
+  for (int i = 1; i <= n; i++){
+    dpp(i,0);
+    int k=0;
+    if (i >= N1) k += dppp(i-N1);
+    if (i >= N2) k += dppp(i-N2);
+    if (i >= N3) k += dppp(i-N3);
+    if (k==0) dpp(i,0);
+    else dpp(i,1);
+  }
+  return dppp(n);
+}
+
+int main ()
+{
+  int n;
+
+  cin >> n;
+
+  cout << (test(n)? "YES\n" : "NO\n");
+
+  return 0;
+}

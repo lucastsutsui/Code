@@ -1,0 +1,24 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+typedef struct{
+  int u;
+  int v;
+  int w;
+}Edge;
+
+int main ()
+{
+  int n, m, t, u, v, ti;
+  bool mat[5001][5001];
+
+  cin >> n >> m >> t;
+
+  for (int i = 0; i < m; i++){
+    cin >> u >> v >> ti;
+    mat[u][v] = mat[v][u] = true;
+  }
+  
+  
+  return 0;
+}

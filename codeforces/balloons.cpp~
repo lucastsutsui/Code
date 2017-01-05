@@ -1,0 +1,21 @@
+#include <iostream>
+#include <math.h>
+
+using namespace std;
+
+int main ( )
+{
+  int r, h, cont = 0;
+
+  cin >> r >> h;
+
+  cont = 2*(h/r);
+  h = h%r;
+  if ((float)h >= (float)r/2) cont+=2;
+  else if ((float)h >= (float)((3*(float)pow(r,2))/4)) cont+=3;
+  else cont++;
+  
+  cout << cont;
+  
+  return 0;
+}

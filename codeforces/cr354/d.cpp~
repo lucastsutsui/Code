@@ -1,0 +1,83 @@
+#include <bits/stdc++.h>
+using namespace std;
+
+int n, m;
+bool visited[1123][1123][4];
+
+void rotate90 (char tab[1123][1123], char tab1[1123][1123]){
+  for (int i = 0; i < n; i++){
+    for (int j = 0; j < m; j++){
+      if (tab[i][j] == '-') tab1[i][j] = '|';
+
+      if (tab[i][j] == '^') tab1[i][j] = '>';
+      if (tab[i][j] == '>') tab1[i][j] = 'v';
+      if (tab[i][j] == 'v') tab1[i][j] = '<';
+      if (tab[i][j] == '<') tab1[i][j] = '^';
+
+      if (tab[i][j] == 'L') tab1[i][j] = 'U';
+      if (tab[i][j] == 'U') tab1[i][j] = 'R';
+      if (tab[i][j] == 'R') tab1[i][j] = 'D';
+      if (tab[i][j] == 'D') tab1[i][j] = 'L';
+    }
+  }
+}
+
+int bfs(int xt, int yt, int xm, int ym, char tab[1123][1123], int ang){
+  if (xt == xm && yt == ym) return 0;
+  if (visited[xt][yt]) return -1;
+  visited[xt][yt] = true;
+
+  int ret[10];
+  char tab1[1123][1123], tab2[1123][1123];
+
+  if ((tab[xt][yt] == '+' || tab[xt][yt] == '|' || tab[xt][yt] == '^' || tab[xt][yt] == 'L' || tab[xt][yt] == 'R' || tab[xt][yt] == 'D') && xt-1>=0)
+    ret[0] = bfs(xt-1,yt,xm,ym,tab,ang);
+  if ((tab[xt][yt] == '+' || tab[xt][yt] == '|' || tab[xt][yt] == 'v' || tab[xt][yt] == 'L' || tab[xt][yt] == 'R' || tab[xt][yt] == 'U') && xt+1<n)
+    ret[1] = bfs(xt+1,yt,xm,ym,tab,ang);
+  if ((tab[xt][yt] == '+' || tab[xt][yt] == '-' || tab[xt][yt] == '>' || tab[xt][yt] == 'L' || tab[xt][yt] == 'U' || tab[xt][yt] == 'D') && yt+1<n)
+    ret[2] = bfs(xt,yt+1,xm,ym,tab,ang);
+  if ((tab[xt][yt] == '+' || tab[xt][yt] == '-' || tab[xt][yt] == '<' || tab[xt][yt] == 'U' || tab[xt][yt] == 'R' || tab[xt][yt] == 'D') && yt-1>=0)
+    ret[3] = bfs(xt,yt-1,xm,ym,tab,ang);
+  
+  rotate90(tab,tab1);
+  ret[4] = bfs(xt,yt,xm,ym,tab1,(ang+1)%4);
+  rotate90(tab1,tab2);
+  ret[5] = bfs(xt,yt,xm,ym,tab1,(ang+2)%4);
+  rotate(tab2,tab1);
+  ret[6] = bfs(xt,yt,xm,ym,tab1,(ang+3)%4);
+
+  visited[xt][yt] = false;
+  int min = ret[0];
+  for (int i = 1; i < 7; i++){
+    if (ret[i] != -1 && (ret[i] < min || min == -1))
+      min = ret[i];
+  }
+
+  return min;
+}
+
+int main ()
+{
+  int xt,yt,xm,ym;
+  char tab[1123][1123];
+
+  cin >> n >> m;
+  
+  for (int i = 0; i < n; i++){
+    getchar();
+    for (int j = 0; j < m; j++)
+      cin >> tab[i][j];
+  }
+
+  cin >> xt >> yt;
+  cin >> xm >> ym;
+
+  for (int i = 0; i < n; i++)
+    for (int j = 0; j < m; j++)
+      for (int a = 0; a < 4; a++)
+	visited[i][j][a] = false;
+
+  cout << bfs(xt-1,yt-1,xm-1,ym-1,tab,0) << endl;
+
+  return 0;
+}
