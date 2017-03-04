@@ -7,10 +7,16 @@ int monthL[12] = {31,29,31,30,31,30,31,31,30,31,30,31};
 int accN[13] = {0, 31, 59, 90, 120, 151, 181, 212, 243, 273, 304, 334, 365};
 int accL[13] = {0, 31, 60, 91, 121, 152, 182, 213, 244, 274, 305, 335, 366};
 
+/*
+Check if a year is leap
+*/
 bool isLeap (int n){
     return (n%4 == 0 && (n%100 != 0 || n%400 == 0));
 }
 
+/*
+Find the date after passing n days
+*/
 void nDaysAfter (int n, int &d, int &m, int &y){
     n += d-1;
     d = 1;
