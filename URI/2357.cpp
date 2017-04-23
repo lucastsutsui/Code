@@ -1,3 +1,4 @@
+
 #include <bits/stdc++.h>
 using namespace std;
 
@@ -19,14 +20,22 @@ int main()
     int a, b;
     
     while (scanf ("%d %d", &n, &m) != EOF){
+        if (m >= n){
+            for (int i = 0; i < m; i++) 
+                scanf("%d %d", &a, &b);
+            puts("Inseguro"); continue;
+        }
+        
         for (int i = 0; i < n; i++) graph[i].clear();
         ans = true;
         
         for (int i = 0; i < m; i++){
             scanf("%d %d", &a, &b); a--; b--;
+            if (a==b) ans = false;
             graph[a].push_back(b);
             graph[b].push_back(a);
         }
+        if (!ans){ puts("Inseguro"); continue; }
         
         for (int i = 0; i < n; i++) visited[i] = false;
         for (int i = 0; i < n; i++) if (ans && !visited[i]) dfs(-1, i);
