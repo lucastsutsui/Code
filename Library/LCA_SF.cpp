@@ -1,4 +1,5 @@
-/* Finding Lowest Common Ancestor between two vertices in a tree */
+/* Finds Lowest Common Ancestor between two vertices in a tree */
+/* Using Super Father method = O(V*sqrt(V))                    */
  
 int fat[MAX];
 int sfat[MAX];
