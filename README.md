@@ -1,2 +1,2 @@
-# Code
-codes for online judges and contests
+# Competitive Programming Code
+solutions for online judge and programming contest problems
